@@ -13,7 +13,7 @@
 ## 算法环境配置
 
 ```bash
-https://github.com/Yuxin-Wei/TZB_ws.git# Ceres 2.1.0
+# Ceres 2.1.0
 sudo apt-get -y install liblapack-dev libsuitesparse-dev libcxsparse3 libgflags-dev libgoogle-glog-dev libgtest-dev
 wget -O ceres-solver.zip https://github.com/ceres-solver/ceres-solver/archive/refs/tags/2.1.0.zip
 unzip -q ceres-solver.zip -d "${TRDPARTY_DIR}"
