@@ -1,0 +1,7 @@
+<!-- filepath: /home/wyx/Planner/TZB_ws/src/livox2pointcloud/launch/livox2pointcloud.launch -->
+<launch>
+    <node name="livox2pointcloud" pkg="livox2pointcloud" type="livox2pointcloud_node" output="screen">
+        <param name="livox_topic" value="/livox/lidar0"/>
+        <param name="pointcloud_topic" value="/livox/pointcloud2"/>
+    </node>
+</launch>

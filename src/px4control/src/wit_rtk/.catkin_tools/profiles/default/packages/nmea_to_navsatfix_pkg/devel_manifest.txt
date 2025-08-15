@@ -1,0 +1,5 @@
+nmea_to_navsatfix_pkg
+/home/wheeltec-client/wit_rtk/devel/.private/nmea_to_navsatfix_pkg/cmake.lock /home/wheeltec-client/wit_rtk/devel/./cmake.lock
+/home/wheeltec-client/wit_rtk/devel/.private/nmea_to_navsatfix_pkg/share/nmea_to_navsatfix_pkg/cmake/nmea_to_navsatfix_pkgConfig-version.cmake /home/wheeltec-client/wit_rtk/devel/share/nmea_to_navsatfix_pkg/cmake/nmea_to_navsatfix_pkgConfig-version.cmake
+/home/wheeltec-client/wit_rtk/devel/.private/nmea_to_navsatfix_pkg/share/nmea_to_navsatfix_pkg/cmake/nmea_to_navsatfix_pkgConfig.cmake /home/wheeltec-client/wit_rtk/devel/share/nmea_to_navsatfix_pkg/cmake/nmea_to_navsatfix_pkgConfig.cmake
+/home/wheeltec-client/wit_rtk/devel/.private/nmea_to_navsatfix_pkg/lib/pkgconfig/nmea_to_navsatfix_pkg.pc /home/wheeltec-client/wit_rtk/devel/lib/pkgconfig/nmea_to_navsatfix_pkg.pc

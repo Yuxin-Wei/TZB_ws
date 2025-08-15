@@ -1,0 +1,6 @@
+<launch>
+  <node name="nmea_to_navsatfix" pkg="nmea_to_navsatfix_pkg" type="nmea_to_navsatfix.py" output="screen">
+    <param name="port" value="/dev/ttyRTK" />
+    <param name="baudrate" value="115200" />
+  </node>
+</launch>

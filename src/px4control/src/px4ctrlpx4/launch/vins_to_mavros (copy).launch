@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="px4ctrlpx4" type="px4ctrlpx4" name="px4ctrlpx4" output="screen"/>
+</launch>

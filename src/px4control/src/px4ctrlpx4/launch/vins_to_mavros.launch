@@ -1,0 +1,7 @@
+<launch>
+    <node pkg="px4ctrlpx4" type="px4ctrlpx4" name="px4ctrlpx4" output="screen">
+    <param name="port" value="5001" />
+    <param name="output_topic" value="/move_base_simple/goal" />
+    <param name="pos_source" value="1" /><!--1->vins 2->mocap -->
+    </node>
+</launch>
