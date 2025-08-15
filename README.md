@@ -1,16 +1,16 @@
-# Fast-LIO2 + SC-A-LOAM + Ego-Planner
-### 使用Fast-LIO2 的激光惯性里程计，加入 SC-A-LOAM 实现回环闭合和位姿图优化，最后使用 ego-planner 作为规划器
-![result](./result.png)
+# 西北工业大学队伍的自主巡检方案
 
-> This project is based on [FAST_LIO_SLAM](https://github.com/GDUT-Kyle/FAST_LIO_SLAM.git)、[livox2pointcloud](https://github.com/juliangaal/livox2pointcloud.git) and [ego-planner-swarm](https://github.com/ZJU-FAST-Lab/ego-planner-swarm.git). It has been modified and greatly improved by emNavi Technology.
+### 方案使用雷达-IMU数据融合的激光惯性里程计，加入 SC-A-LOAM 实现回环闭合和位姿图优化，改进自适应轨迹规划技术作为规划器，最终设计**基于INDI的内环姿态控制+基于TinyMPC的外环位置/速度控制的控制器**
 
 ## 实验配置
-- 环境：ROS1 Noetic
+
+- 环境：ROS1 Noetic GAZEBO
 - 激光雷达：Mid360
-- IMU：Mid360自带的IMU
+- IMU：设计的高频率IMU模块
 - 驱动包：Livox SDK2
 
-## 环境配置
+## 算法环境配置
+
 ```bash
 # Ceres 2.1.0
 sudo apt-get -y install liblapack-dev libsuitesparse-dev libcxsparse3 libgflags-dev libgoogle-glog-dev libgtest-dev
@@ -57,8 +57,10 @@ catkin_make
 ```
 
 ## 使用
+
 Mid360激光雷达上电，插入Mid360激光雷达网口至电脑，[配置好 livox_ros_driver2 驱动包中的 IP 地址](https://github.com/Livox-SDK/livox_ros_driver2?tab=readme-ov-file#4-lidar-config)，确保雷达可使用
-```bash 
+
+```bash
 # 开启 Fast_LIO2 算法
 bash ./run_fast_lio.sh 
 
