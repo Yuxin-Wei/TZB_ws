@@ -1,0 +1,531 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="default">
+    <!-- A global light source -->
+    <scene>
+      <sky>
+        <clouds>
+          <speed>12</speed>
+        </clouds>
+      </sky>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+
+    <!-- 太阳光照 -->
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+
+    <!-- 物理引擎设置 -->
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>1
+
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <!-- 地面平面 -->
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>200 200</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>200 200</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grass</name>
+            </script>
+            <ambient>0.5 0.6 0.3 1</ambient>
+            <diffuse>0.7 0.8 0.5 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+
+    <!-- 桥梁支撑结构 - 左侧砖块 (放大3倍) -->
+    <model name='brick_box_left_support'>
+      <static>1</static>
+      <link name='chassis'>
+        <pose>0 0 4.5 0 0 0</pose>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>9 3 9</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://brick_box_3x1x3/meshes/simple_box.dae</uri>
+              <scale>9 3 9</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://brick_box_3x1x3/materials/scripts</uri>
+              <uri>model://brick_box_3x1x3/materials/textures</uri>
+              <name>BrickBox/Diffuse</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-22 0 0 0 0 1.5708</pose>
+    </model>
+
+    <!-- 桥梁支撑结构 - 右侧砖块 (放大3倍) -->
+    <model name='brick_box_right_support'>
+      <static>1</static>
+      <link name='chassis'>
+        <pose>0 0 4.5 0 0 0</pose>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>9 3 9</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://brick_box_3x1x3/meshes/simple_box.dae</uri>
+              <scale>9 3 9</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://brick_box_3x1x3/materials/scripts</uri>
+              <uri>model://brick_box_3x1x3/materials/textures</uri>
+              <name>BrickBox/Diffuse</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>22 0 0 0 0 1.5708</pose>
+    </model>
+
+    <!-- 主桥梁结构 - truss_bridge (放大3倍) -->
+    <model name='main_truss_bridge'>
+      <static>1</static>
+      <link name='bridge_link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://truss_bridge/meshes/truss_bridge.dae</uri>
+              <scale>3 3 3</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <!-- 添加桥面平面用于LiDAR扫描 (与桥梁旋转方向一致) -->
+        <collision name='bridge_deck_collision'>
+          <pose>0 0 1.0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>12 48 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://truss_bridge/meshes/truss_bridge.dae</uri>
+              <scale>3 3 3</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <!-- 添加桥面视觉效果 (与桥梁旋转方向一致) -->
+        <visual name='bridge_deck_visual'>
+          <pose>0 0 1.0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>12 48 0.3</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Road</name>
+            </script>
+            <ambient>0.5 0.5 0.5 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <cast_shadows>true</cast_shadows>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0 0 9 0 0 1.5708</pose>
+    </model>
+
+    <!-- 桥面上的移动人类 (行走在桥面上) -->
+    <model name="person1_bridge_deck">
+      <pose>-7.0 3.0 10.7 0 0 0</pose>
+      <link name="link">
+        <inertial>
+          <pose>0 0 0.9 0 0 0</pose>
+          <mass>80.0</mass>
+          <inertia>
+            <ixx>27.82</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>24.88</iyy>
+            <iyz>0</iyz>
+            <izz>4.57</izz>
+          </inertia>
+        </inertial>
+        <collision name="bottom">
+          <pose>0 0 0.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.5 0.3 0.2</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <pose>0 0 0 0 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <uri>model://person/meshes/walking.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name="obstacle_motion" filename="libobstaclePathPlugin.so">
+        <loop>0</loop>
+        <velocity>1.5</velocity>
+        <angular_velocity>2.0</angular_velocity>
+        <path>
+          <waypoint>-7.0 3.0 10.7</waypoint>
+          <waypoint>7.0 3.0 10.7</waypoint>
+        </path>
+      </plugin>
+    </model>
+
+    <model name="person2_bridge_deck">
+      <pose>6.0 1.0 10.7 0 0 0</pose>
+      <link name="link">
+        <inertial>
+          <pose>0 0 0.9 0 0 0</pose>
+          <mass>80.0</mass>
+          <inertia>
+            <ixx>27.82</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>24.88</iyy>
+            <iyz>0</iyz>
+            <izz>4.57</izz>
+          </inertia>
+        </inertial>
+        <collision name="bottom">
+          <pose>0 0 0.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.5 0.3 0.2</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <pose>0 0 0 0 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <uri>model://person/meshes/walking.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name="obstacle_motion" filename="libobstaclePathPlugin.so">
+        <loop>0</loop>
+        <velocity>1.2</velocity>
+        <angular_velocity>1.8</angular_velocity>
+        <path>
+          <waypoint>6.0 1.0 10.7</waypoint>
+          <waypoint>-6.0 1.0 10.7</waypoint>
+        </path>
+      </plugin>
+    </model>
+
+    <model name="person3_bridge_deck">
+      <pose>-5.0 -1.0 10.7 0 0 0</pose>
+      <link name="link">
+        <inertial>
+          <pose>0 0 0.9 0 0 0</pose>
+          <mass>80.0</mass>
+          <inertia>
+            <ixx>27.82</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>24.88</iyy>
+            <iyz>0</iyz>
+            <izz>4.57</izz>
+          </inertia>
+        </inertial>
+        <collision name="bottom">
+          <pose>0 0 0.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.5 0.3 0.2</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <pose>0 0 0 0 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <uri>model://person/meshes/walking.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name="obstacle_motion" filename="libobstaclePathPlugin.so">
+        <loop>0</loop>
+        <velocity>1.8</velocity>
+        <angular_velocity>2.2</angular_velocity>
+        <path>
+          <waypoint>-5.0 -1.0 10.7</waypoint>
+          <waypoint>5.0 -1.0 10.7</waypoint>
+        </path>
+      </plugin>
+    </model>
+
+    <model name="person4_bridge_deck">
+      <pose>4.0 -3.0 10.7 0 0 0</pose>
+      <link name="link">
+        <inertial>
+          <pose>0 0 0.9 0 0 0</pose>
+          <mass>80.0</mass>
+          <inertia>
+            <ixx>27.82</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>24.88</iyy>
+            <iyz>0</iyz>
+            <izz>4.57</izz>
+          </inertia>
+        </inertial>
+        <collision name="bottom">
+          <pose>0 0 0.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.5 0.3 0.2</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <pose>0 0 0 0 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <uri>model://person/meshes/walking.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name="obstacle_motion" filename="libobstaclePathPlugin.so">
+        <loop>0</loop>
+        <velocity>1.4</velocity>
+        <angular_velocity>1.9</angular_velocity>
+        <path>
+          <waypoint>4.0 -3.0 10.7</waypoint>
+          <waypoint>-4.0 -3.0 10.7</waypoint>
+        </path>
+      </plugin>
+    </model>
+
+    <!-- 桥面上的静止SUV车辆 (高度10m) -->
+    <model name="suv1_bridge_deck">
+      <pose>16 2.5 10 0 0 3.14159</pose>
+      <static>true</static>
+      <link name="suv_link">
+        <collision name="suv_collision">
+          <pose>0 0 0 0 0 -1.57079632679</pose>
+          <geometry>
+            <mesh>
+              <scale>0.06 0.06 0.06</scale>
+              <uri>model://suv/meshes/suv.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="suv_visual">
+          <pose>0 0 0 0 0 -1.57079632679</pose>
+          <geometry>
+            <mesh>
+              <scale>0.06 0.06 0.06</scale>
+              <uri>model://suv/meshes/suv.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+
+    <model name="suv2_bridge_deck">
+      <pose>-16 -2.5 10 0 0 0</pose>
+      <static>true</static>
+      <link name="suv_link">
+        <collision name="suv_collision">
+          <pose>0 0 0 0 0 -1.57079632679</pose>
+          <geometry>
+            <mesh>
+              <scale>0.06 0.06 0.06</scale>
+              <uri>model://suv/meshes/suv.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="suv_visual">
+          <pose>0 0 0 0 0 -1.57079632679</pose>
+          <geometry>
+            <mesh>
+              <scale>0.06 0.06 0.06</scale>
+              <uri>model://suv/meshes/suv.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>0</gravity>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+
+  </world>
+</sdf>
